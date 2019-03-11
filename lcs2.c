@@ -9,8 +9,29 @@ void print_array(int *arr, int size){
 }
 
 int lcs2(int *a, int n,  int *b, int m) {
-	//write your code here
-	return 0;
+	int grid[n+1][m+1];
+	for(int i = 0; i <= m; i++) {
+		grid[0][i] = 0;
+	}
+	for(int i = 0; i <= n; i++) {
+		grid[i][0] = 0;
+	}
+	for(int i = 1; i <= n; i++) {
+		for(int j = 1; j <= m; j++) {
+			int count = 0;
+			if(a[i-1] == b[j-1]) {
+				count = grid[i-1][j-1] + 1;
+			}
+			if(grid[i][j-1] > count) {
+				count = grid[i][j-1];
+			}
+			if(grid[i-1][j] > count) {
+				count = grid[i-1][j];
+			}
+			grid[i][j] = count;
+		}
+	}
+	return grid[n][m];
 }
 
 int main() {
